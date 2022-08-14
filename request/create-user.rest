@@ -1,0 +1,8 @@
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+{
+  "first_name": "amparo",
+  "last_name": "guichalaf gatica",
+  "email": "benjamingaticatapia@gmail.com"
+}
