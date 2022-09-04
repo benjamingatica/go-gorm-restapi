@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+#database engine service
+  postgres_db:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+        #allow *.sql, *.sql.gz, or *.sh and is execute only if data directory is empty
+      - ./dbfiles:/docker-entrypoint-initdb.d
+      - /var/lib/postgres_data_go_api:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: postgres 
+
+  restapi:
+    container_name: go-gorm-restapi
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - postgres_db
